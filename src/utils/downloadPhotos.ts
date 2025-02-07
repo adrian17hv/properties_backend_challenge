@@ -2,6 +2,7 @@ import axios from "axios";
 import fs from "fs";
 import path from "path";
 import sharp from "sharp";
+import chalk from "chalk";
 import { House } from "../types/types";
 import { formatFileName } from "./formatFilename";
 
@@ -14,7 +15,7 @@ export const downloadPhoto = async (house: House) => {
     const formattedFilename = formatFileName(house.id, house.address, ext);
     const filepath = path.join(PHOTOS_DIRECTORY, formattedFilename);
 
-    console.log(`Saving photos in directory: ${path.resolve(PHOTOS_DIRECTORY)}`);
+    console.log(chalk.green(`📸 Saving photos in directory: ${chalk.bold(path.resolve(PHOTOS_DIRECTORY))} 📁`));
 
     const optimizedImage = await sharp(response.data)
       .resize(800)
@@ -22,12 +23,13 @@ export const downloadPhoto = async (house: House) => {
       .toBuffer();
 
     fs.writeFileSync(filepath, optimizedImage);
-    console.log(`Saved: ${formattedFilename}`);
+    console.log(chalk.blue(`✅ Saved: ${chalk.bold(formattedFilename)}`));
+
   } catch (error: unknown) {
     if (error instanceof Error) {
-      console.error(`Error downloading photo files ${house.photoURL}:`, error.message);
+      console.error(chalk.red(`❌ Error downloading photo files ${house.photoURL}: ${error.message}`));
     } else {
-      console.error(`Error downloading photo files ${house.photoURL}: Unknown error`);
+      console.error(chalk.red(`❌ Error downloading photo files ${house.photoURL}: Unknown error`));
     }
   }
 };
