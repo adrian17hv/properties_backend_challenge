@@ -1,6 +1,6 @@
 # House Photo Downloader
 
-**House Photo Downloader** is a script that fetches house data from an API and downloads images while optimizing them for storage.
+**House Photo Downloader** is a script that fetches properties data from an API and downloads the images while optimizing them for storage.
 
 ## Table of Contents
 
@@ -63,6 +63,10 @@ To fetch and download house images, run:
 ```bash
 npx ts-node src/index.ts
 ```
+
+## Example video
+
+https://github.com/user-attachments/assets/d17c0a9d-b351-4d19-b6ce-e8b4001bd7ae
 
 ## Usage
 
